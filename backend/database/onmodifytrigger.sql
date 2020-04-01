@@ -1,4 +1,6 @@
 ALTER TABLE users
+ADD timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE users
 ADD modifyon TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
 create or replace function change_timestamp()

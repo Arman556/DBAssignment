@@ -1,6 +1,6 @@
 CREATE table roles(
-    fname VARCHAR(100) NOT NULL,
-    fkey serial NOT NULL,
+    role_name VARCHAR(100) NOT NULL,
+    role_key serial NOT NULL,
     discription VARCHAR(300),
-    CONSTRAINT new_pk2 PRIMARY KEY (fkey)
+    CONSTRAINT roles_pk PRIMARY KEY (role_key)
 );

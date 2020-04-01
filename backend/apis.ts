@@ -24,14 +24,15 @@ function getData(req,res)
   res.status(200).json(result.rows);
     })  
 }
-app.get("/class2",getData);
+
+app.get("/fetchUserData",getData);
 app.delete("/delete/:id",function(req,res){
   let id1=req.params.id;
   client.query(`delete from users where empid=${id1};`,(err,result)=>{
     res.send();
   })
 })
-app.put('/update/:id',function(req,res){
+app.put('/updateUser/:id',function(req,res){
   const value=req.body;
   const id1=req.params.id;
   client.query(`update users set firstname=$1,middlename=$2,lastname=$3,email=$4,phoneno=$5,role=$6,address=$7,customer_id=$8
@@ -39,13 +40,13 @@ app.put('/update/:id',function(req,res){
   res.send();
   console.log(value);
 })
-app.post('/addrow',function(req,res){
+app.post('/addUser',function(req,res){
   const value=req.body;
-  //const id1=req.params.id;
+  
   client.query(`insert into users(firstname,middlename,lastname,email,phoneno,role,address,customer_id) values ($1,$2,$3,$4,$5,$6,$7,$8) returning empid;`,[value.firstname,value.middlename,value.lastname,value.email,value.phoneno,value.role,value.address,value.customer_id])
   .then((result:any)=>res.json(result.rows[0]));
 })
-app.get('/getids',function(req,res){
+app.get('/getUserid',function(req,res){
   client.query(`select fkey,fname from roles`,(err,result)=>{
     console.log(result.rows); 
   res.status(200).json(result.rows);

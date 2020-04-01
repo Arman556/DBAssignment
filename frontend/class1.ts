@@ -13,7 +13,6 @@ class actions {
   table:any;
   arr:any;
   Emp:any;
-  //cell:any[]=[];
   constructor() {
     this.copy = [];
     this.arrHeaders = [];
@@ -104,11 +103,11 @@ class actions {
     let cellClass = "cell" + val;
     let cell = document.getElementsByClassName(cellClass);
     this.copyLastRow(val);
-    //console.log(this.copy);
+    
     if (this.flag) {
       this.flag = false;
       for (let i = 0; i <cell.length; i++) {
-        // cell[i].setAttribute("contenteditable", "true");
+    
         if(i===5)
         {
           obj3.fetchids().then(data => { cell[i].innerHTML = `<select id = "role1"></select>`
@@ -151,7 +150,7 @@ class actions {
         let span1=document.getElementById("span1")!;
         span1.style.fontSize="12px";
         span1.innerHTML="invalid email";
-       // alert("invalid email");
+    
      }
      if(!obj2.phoneno(`${row_array[4]}`))
       { this.flag=false;
@@ -159,7 +158,7 @@ class actions {
         let span1=document.getElementById("span2")!;
         span1.style.fontSize="12px";
         span1.innerHTML="invalid phoneNo.";
-       // alert("invalid email");
+    
      }
      if(!obj2.notempty(row_array[0]))
       { this.flag=false;
@@ -167,7 +166,7 @@ class actions {
         let span1=document.getElementById("span3")!;
         span1.style.fontSize="12px";
         span1.innerHTML="enter firstname";
-       // alert("invalid email");
+    
      }
      if(!obj2.notempty(row_array[6]))
       { this.flag=false;
@@ -175,7 +174,7 @@ class actions {
         let span1=document.getElementById("span4")!;
         span1.style.fontSize="12px";
         span1.innerHTML="enter address";
-       // alert("invalid email");
+    
      }
      if(!obj2.notempty(row_array[2]))
       { this.flag=false;
@@ -183,7 +182,7 @@ class actions {
         let span1=document.getElementById("span5")!;
         span1.style.fontSize="12px";
         span1.innerHTML="enter lastname";
-       // alert("invalid email");
+    
      }
      if(obj2.notempty(row_array[2])&&obj2.email(row_array[3])&&obj2.notempty(row_array[6])&&obj2.notempty(row_array[0])&&obj2.phoneno(`${row_array[4]}`)){
       let newEmployee = new Imp.Employee(row_array[0],row_array[1],
@@ -192,7 +191,7 @@ class actions {
         row_array[6],+row_array[7]);
         newEmployee.id = val;
         this.copy = [];
-      fetch(`http://localhost:3000/update/${val}`,{
+      fetch(`http://localhost:3000/updateUser/${val}`,{
         method: "put",
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(newEmployee)}
@@ -221,7 +220,7 @@ class actions {
     let cellClass = "cell" + val;
     let cell = document.getElementsByClassName(cellClass)!;
     if (this.flag) {
-      fetch(`http://localhost:3000/delete/${val}`,{
+      fetch(`http://localhost:3000/deleteUser/${val}`,{
         method: "delete"
       })
     .then(res=>{
@@ -236,7 +235,7 @@ class actions {
       let deletebtn="delete"+val;
       for(let i=0;i<this.rows-1;i++)
       {
-        //console.log(this.Emp[i].empid);
+    
         this.arr[this.Emp[i].empid]=1;
       }
       let btnid=document.getElementById(deletebtn)!.innerHTML;
@@ -245,7 +244,7 @@ class actions {
       if((btnid=="cancel")&&this.arr[val]==0)
       {
         console.log("entering block");
-          fetch(`http://localhost:3000/delete/${val}`, {
+          fetch(`http://localhost:3000/deleteUser/${val}`, {
               method: "delete"
           })
               .then(res => {
@@ -268,7 +267,7 @@ class actions {
   copyLastRow(val: number) {
     let cellClass = "cell" + val;
     let cell = document.getElementsByClassName(cellClass);
-    //console.log(cell);
+    
     for (let i = 0; i < this.cols; i++) {
       if(i===5)
       {
@@ -305,7 +304,7 @@ class actions {
     for (let i = 0; i < this.rows; i++) {
       console.log(this.Emp[i].empid);
       if (this.removeRow[this.Emp[i].empid] !== true && this.Emp[i].empid !== val) {
-        //console.log(this.Emp[i].empid);
+    
         document.getElementById("edit" + this.Emp[i].empid)!.toggleAttribute("disabled");
         document.getElementById("delete" + this.Emp[i].empid)!.toggleAttribute("disabled");
       }
@@ -316,7 +315,7 @@ class actions {
     for (let i = 0; i < this.rows; i++) {
       console.log(this.Emp[i].empid);
       if (this.removeRow[this.Emp[i].empid] !== true && this.Emp[i].empid  !== val) {
-        //console.log(this.Emp[i].empid);
+    
         document.getElementById("edit" + this.Emp[i].empid)!.toggleAttribute("disabled");
         document.getElementById("delete" + this.Emp[i].empid)!.toggleAttribute("disabled");
       }
@@ -326,7 +325,7 @@ class actions {
         let ind:any;
         let newEmployee = new Imp.Employee("","","","dummy@gmail.com",9999999999,1,"",1);
         console.log(newEmployee);
-        fetch(`http://localhost:3000/addrow`,{
+        fetch(`http://localhost:3000/addUser`,{
         method: "POST",
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(newEmployee)}
